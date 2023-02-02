@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Tasks</title>
+</head>
+<body>
+    <div style="text-align:center;">
+        <div>  
+            <input type = "text" placeholder = "Press Enter after adding task"  id = "text">  
+            <button id="firstDel">Drop from top</button>
+            <button id="lastDel">Drop from down </button>
+            <p>You can also drop list items by just adding the number of item you want to remove</p>
+            <input type="text" name="" id="index" placeholder="Just tell number">
+            <button id="removeindex">Drop</button>
+        </div>
+        <div class="list" >
+            <ul style="display: inline-block;text-align: left;" id="myList">
+            </ul>
+        </div>  
+
+    </div>
+
+</body>
+<script>  
+   
+  $(document).ready(function(){
+      $("ul").on('click', "span", function (e) {  
+   
+    $(this).closest("li").fadeOut(200,function() {  
+     $(this).remove();   
+    });  
+  });  
+  $("input[type='text']").keypress(function(e) {  
+    if(e.which === 13) {  
+      var todoText = $(this).val();  
+      if( $(this).val() !== "") {  
+      $("ul").append(`<li> ` +todoText  +`<span style="margin-left:15px;"> <i class='fa fa-trash' style="cursor:pointer;"> </i> </span>` + `</li>`);  
+        }   
+      $(this).val("");  
+    }  
+  }); 
+
+  });
+  $(document).ready(function(){
+    $("#firstDel").click(function(){
+    $("#myList li:first-child").remove();
+  });
+  })
+
+  $(document).ready(function(){
+$("#lastDel").click(function(){
+    $("#myList li:last-child").remove();
+  });
+});
+ 
+$(document).ready(function () {
+$("#removeindex").click(function(){
+    var num=$("#index").val();
+  $("#myList li").eq(num-1).remove();
+  $("#index").val("");
+
+  });
+});
+     
+</script>
+
+</html>
